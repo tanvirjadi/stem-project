@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum PersonStatus {
+  ADULT
+  CHILD
+  HOMEOWNER
+  VISITOR
+  OTHER
+}
+
+model TrustedFace {
+  id             Int          @id @default(autoincrement())
+  firstName      String       @map("first_name")
+  lastName       String?      @map("last_name")
+  email          String?
+  password       String?
+  hponeNumber    String?      @map("hpone_number")
+  status         PersonStatus @default(OTHER)
+  active         Boolean      @default(true)
+  image          String       @unique
+  imageMimetype  String?      @map("image_mimetype")
+  createdAt      DateTime     @default(now()) @map("created_at")
+  updatedAt      DateTime     @updatedAt @map("updated_at")
+
+  @@map("trusted_faces")
+}
+
+model Visitor {
+  id             Int          @id @default(autoincrement())
+  image          String
+  imageMimetype  String?      @map("image_mimetype")
+  visitedAt      DateTime     @default(now()) @map("visited_at")
+  createdAt      DateTime     @default(now()) @map("created_at")
+
+  @@map("visitors")
+}

@@ -1,0 +1,27 @@
+{
+  "name": "esp32-cam-home-security",
+  "version": "1.0.0",
+  "description": "Minimal private ESP32-CAM face recognition backend",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node --watch server.js",
+    "start": "node server.js",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev --name init",
+    "db:push": "prisma db push",
+    "sync:faces": "node scripts/syncFaces.js",
+    "download:models": "node scripts/downloadModels.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.9.0",
+    "@tensorflow/tfjs": "^4.22.0",
+    "@vladmandic/face-api": "^1.7.14",
+    "canvas": "^3.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "multer": "^1.4.5-lts.1",
+    "prisma": "^6.9.0"
+  }
+}
